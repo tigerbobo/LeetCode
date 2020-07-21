@@ -1,30 +1,38 @@
-#include <string>
-#include <algorithm>
-
-
 int reverse(int x)
 {
-	std::string s;
-	char buffer[100] = { 0 };
-	long long result = abs(x);
+	int temp, result = 0;
 
-	sprintf_s(buffer, 100, "%lld", result);
-
-	s = buffer;
-
-	std::reverse(s.begin(), s.end());
-
-	if (x >= 0)
+	temp = x;
+	while (true)
 	{
-		result = atoll(s.c_str());
-		if (result > INT_MAX)
-			result = 0;
-	}
-	else
-	{
-		result = 0 - atoll(s.c_str());
-		if (result < INT_MIN)
-			result = 0;
+		if (x > 0)
+		{
+			if(result > INT_MAX / 10)
+				return 0;
+		}
+		else
+		{
+			if (result < INT_MIN / 10)
+				return 0;
+		}
+		result *= 10;
+
+		if (x > 0)
+		{
+			if(INT_MAX - result < temp % 10)
+				return 0;
+		}
+		else
+		{
+			if(INT_MIN - result > temp % 10)
+				return 0;
+		}
+		
+		result += temp % 10;
+
+		temp /= 10;
+		if (0 == temp)
+			break;
 	}
 
 	return result;
