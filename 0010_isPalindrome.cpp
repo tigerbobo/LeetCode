@@ -5,6 +5,9 @@ bool isPalindrome(int x)
 
 	if (x < 10)
 		return true;
+	
+	if (0 == x % 10)
+		return false;
 
 	int start, stop;
 	bool result = true;
